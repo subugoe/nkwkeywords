@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/w3d/!svn/ver/1499/branches/dev/typo3conf/ext/nkwkeywords/build
+END
+phpmd.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/w3d/!svn/ver/1499/branches/dev/typo3conf/ext/nkwkeywords/build/phpmd.xml
+END
+phpcs.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/repos/w3d/!svn/ver/1499/branches/dev/typo3conf/ext/nkwkeywords/build/phpcs.xml
+END

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'nkwkeywords'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_nkwkeywords_keywords">Keywords</label>
+			<label index="tx_nkwkeywords_keywords.title_de">Keyword (german)</label>
+			<label index="tx_nkwkeywords_keywords.title_en">Keyword (english)</label>
+			<label index="tx_nkwkeywords_keywords.title">Title</label>
+			<label index="tt_content.list_type_pi2">Keywordslist</label>
+			<label index="tt_content.list_type_pi3">Keywordpage</label>
+			<label index="flexform.target">Target</label>
+			<label index="pages.tx_nkwkeywords_keywords">Keywords</label>
+		</languageKey>
+		<languageKey index="de" type="array">
+			<label index="tx_nkwkeywords_keywords">Schlagwörter</label>
+			<label index="tx_nkwkeywords_keywords.title_de">Schlagwort (deutsch)</label>
+			<label index="tx_nkwkeywords_keywords.title_en">Schlagwort (englisch)</label>
+			<label index="tx_nkwkeywords_keywords.title">Titel</label>
+			<label index="tt_content.list_type_pi2">Schlagwortliste</label>
+			<label index="tt_content.list_type_pi3">Schlagwortseite</label>
+			<label index="flexform.target">Zielseite</label>
+			<label index="pages.tx_nkwkeywords_keywords">Schlagwörter</label>
+		</languageKey>
+	</data>
+</T3locallang>

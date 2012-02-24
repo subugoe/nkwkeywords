@@ -1,0 +1,7 @@
+{namespace sub=Tx_TmplSub_ViewHelpers}
+
+<f:layout name="Main" />
+
+<f:section name="content">
+	<sub:widget.az objects="{keywords}" configuration="{titleField: 'title', linkObject:'keyword', linkAction:'detail', linkController:'Keywords', linkPluginName:'keyword', linkExtensionName:'nkwkeywords'}" />
+</f:section>

@@ -38,6 +38,18 @@ class Tx_Nkwkeywords_Domain_Model_Keywords extends Tx_Extbase_DomainObject_Abstr
 	 */
 	protected $title;
 
+	/**
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Nkwkeywords_Domain_Model_Page>
+	 */
+	protected $pages;
+
+	public function __construct() {
+		$this->initStorageObjects();
+	}
+
+	protected function initStorageObjects() {
+		$this->pages = new Tx_Extbase_Persistence_ObjectStorage();
+	}
 
 	/**
 	 * @param string $title
@@ -51,6 +63,20 @@ class Tx_Nkwkeywords_Domain_Model_Keywords extends Tx_Extbase_DomainObject_Abstr
 	 */
 	public function getTitle() {
 		return $this->title;
+	}
+
+	/**
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Nkwkeywords_Domain_Model_Page> $pages
+	 */
+	public function setPages(Tx_Nkwkeywords_Domain_Model_Page $pages) {
+		$this->pages = $pages;
+	}
+
+	/**
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Nkwkeywords_Domain_Model_Page>
+	 */
+	public function getPages() {
+		return $this->pages;
 	}
 
 }

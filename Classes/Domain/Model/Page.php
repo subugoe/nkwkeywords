@@ -38,6 +38,29 @@ class Tx_Nkwkeywords_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractE
 	 */
 	protected $title;
 
+	/**
+	 * @var Tx_Nkwkeywords_Domain_Model_Page $parentPage
+	 */
+	protected $parentPage;
+
+	/**
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Nkwkeywords_Domain_Model_Keywords> $keyword
+	 */
+	protected $keywords;
+
+	/**
+	 * constructor
+	 */
+	public function __construct() {
+		$this->initStorageObjects();
+	}
+
+	/**
+	 * initializes Extbase storage objects
+	 */
+	protected function initStorageObjects() {
+		$this->keywords = new Tx_Extbase_Persistence_ObjectStorage();
+	}
 
 	/**
 	 * @param string $title
@@ -52,5 +75,34 @@ class Tx_Nkwkeywords_Domain_Model_Page extends Tx_Extbase_DomainObject_AbstractE
 	public function getTitle() {
 		return $this->title;
 	}
+
+	/**
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Nkwkeywords_Domain_Model_Keywords> $keywords
+	 */
+	public function setKeywords($keywords) {
+		$this->keywords = $keywords;
+	}
+
+	/**
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Nkwkeywords_Domain_Model_Keywords>
+	 */
+	public function getKeywords() {
+		return $this->keywords;
+	}
+
+	/**
+	 * @param Tx_Nkwkeywords_Domain_Model_Page $parentPage
+	 */
+	public function setParentPage($parentPage) {
+		$this->parentPage = $parentPage;
+	}
+
+	/**
+	 * @return Tx_Nkwkeywords_Domain_Model_Page
+	 */
+	public function getParentPage() {
+		return $this->parentPage;
+	}
+
 
 }

@@ -1,6 +1,42 @@
-lib.nkwkeywords.keywordTitle = TEXT
-lib.nkwkeywords.keywordTitle {
-	dataWrap = DB:tx_nkwkeywords_keywords:{GP:tx_nkwkeywords|id}:title_de
-	wrap3 = {|}
-	insertData = 1
+plugin.tx_nkwkeywords {
+	persistence {
+		storagePid = {$plugin.tx_nkwkeywords.persistence.storagePid}
+		classes {
+			Tx_Nkwkeywords_Domain_Model_Page {
+				mapping {
+					tableName = pages
+					columns {
+						pid.mapOnProperty = parentPage
+					}
+				}
+			}
+		}
+	}
+	features {
+		skipDefaultArguments = 1
+	}
+	view {
+		defaultPid = auto
+	}
+	_CSS_DEFAULT_STYLE (
+		input.f3-form-error {
+			background-color:#FF9F9F;
+			border: 1px #FF0000 solid;
+		}
+
+		.tx-substaff table {
+			border-collapse:separate;
+			border-spacing:10px;
+		}
+
+		.tx-substaff table th {
+			font-weight:bold;
+		}
+
+		.tx-substaff table td {
+			vertical-align:top;
+		}
+	)
 }
+
+module.tx_nkwkeywords.persistence < plugin.tx_nkwkeywords.persistence

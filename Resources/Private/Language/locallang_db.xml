@@ -14,6 +14,8 @@
 			<label index="tt_content.list_type_pi3">Keywordpage</label>
 			<label index="flexform.target">Target</label>
 			<label index="pages.tx_nkwkeywords_keywords">Keywords</label>
+			<label index="mlang_tabs_tab">Keywords</label>
+			<label index="mlang_labels_tabdescr">Keyword Administration</label>
 		</languageKey>
 		<languageKey index="de" type="array">
 			<label index="tx_nkwkeywords_keywords">Schlagwörter</label>
@@ -24,6 +26,8 @@
 			<label index="tt_content.list_type_pi3">Schlagwortseite</label>
 			<label index="flexform.target">Zielseite</label>
 			<label index="pages.tx_nkwkeywords_keywords">Schlagwörter</label>
+			<label index="mlang_tabs_tab">Keywords</label>
+			<label index="mlang_labels_tabdescr">Verwaltung der Keywords</label>
 		</languageKey>
 	</data>
 </T3locallang>

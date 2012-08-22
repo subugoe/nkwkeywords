@@ -35,42 +35,49 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 		$_EXTKEY, 'keyword', 'Keyword Details (EF)'
 );
 
-if (TYPO3_MODE == 'BE') {
-	t3lib_extMgm::addModulePath('web_txnkwkeywordsM1', t3lib_extMgm::extPath($_EXTKEY) . 'mod1/');
-	t3lib_extMgm::addModule('web', 'txnkwkeywordsM1', '', t3lib_extMgm::extPath($_EXTKEY) . 'mod1/');
-}
 $TCA['tx_nkwkeywords_domain_model_keywords'] = array(
-	'ctrl' => array(
-		'title' => 'LLL:EXT:nkwkeywords/locallang_db.xml:tx_nkwkeywords_domain_model_keywords',
+		'ctrl' => array(
+		'title' => 'LLL:EXT:nkwkeywords/Resources/Private/Language/locallang_db.xml:tx_nkwkeywords_domain_model_keywords',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
-		'type' => 'title',
 		'default_sortby' => 'ORDER BY title',
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Keywords.php',
 		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . '/Resources/Public/Img/icon_tx_nkwkeywords_domain_model_keywords.gif',
+		'searchFields' => 'title',
+		'versioningWS' => TRUE,
+		'versioning_followPages' => TRUE,
+		'origUid' => 't3_origuid',
+		'languageField' => 'sys_language_uid',
+		'transOrigPointerField' => 'l18n_parent',
+		'transOrigDiffSourceField' => 'l18n_diffsource',
 	),
 );
 
-
-t3lib_div::loadTCA('tt_content');
+t3lib_div::loadTCA('pages');
 
 $tempColumns = array(
-	'tx_nkwkeywords_domain_model_keywords' => array(
-		'exclude' => 0,
+	'keywords' => array(
+		'exclude' => 1,
 		'label' => 'LLL:EXT:nkwkeywords/Resources/Private/Language/locallang_db.xml:pages.tx_nkwkeywords_domain_model_keywords',
 		'config' => array(
 			'type' => 'select',
 			'foreign_table' => 'tx_nkwkeywords_domain_model_keywords',
-			'foreign_table_where' => 'ORDER BY tx_nkwkeywords_domain_model_keywords.title',
-			'size' => 20,
-			'minitems' => 1,
-			'maxitems' => 99,
-		)
+			'foreign_field' => 'title',
+			'foreign_table_where' => ' AND sys_language_uid = 0 ORDER BY tx_nkwkeywords_domain_model_keywords.title ASC',
+			'MM' => 'tx_nkwkeywords_pages_keywords_mm',
+			'maxitems' => 9999,
+			'size'=> 10,
+			'appearance' => array(
+				'collapse' => 0,
+				'levelLinksPosition' => 'both',
+				'showSynchronizationLink' => 1,
+				'showPossibleLocalizationRecords' => 1,
+				'showAllLocalizationLink' => 1
+			),
+		),
 	),
 );
-t3lib_div::loadTCA('pages');
 t3lib_extMgm::addTCAcolumns('pages', $tempColumns, 1);
-t3lib_extMgm::addToAllTCAtypes('pages', 'tx_nkwkeywords_domain_model_keywords;;;;1-1-1');
 ?>

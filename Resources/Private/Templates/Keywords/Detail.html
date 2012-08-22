@@ -1,1 +1,14 @@
-Detail
+<f:layout name="Main" />
+
+<f:section name="content">
+
+	<h2>{header}</h2>
+
+	<ul>
+		<f:for each="{keyword.pages}" as="page">
+			<li>
+				<f:link.action pageUid="{page.uid}">{page.title}</f:link.action> ({page.parentPage.title})
+			</li>
+		</f:for>
+	</ul>
+</f:section>

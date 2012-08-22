@@ -35,23 +35,15 @@ class Tx_Nkwkeywords_Controller_KeywordsController extends Tx_Extbase_MVC_Contro
 
 	/**
 	 * @var Tx_Nkwkeywords_Domain_Repository_KeywordsRepository
+	 * @inject
 	 */
-	protected $keywordsRepostitory;
-
-	/**
-	 * Inject an Instance of the Keyword Repository
-	 *
-	 * @param Tx_Nkwkeywords_Domain_Repository_KeywordsRepository $keywordsRepostitory
-	 */
-	public function injectKeywordRepository(Tx_Nkwkeywords_Domain_Repository_KeywordsRepository $keywordsRepostitory) {
-		$this->keywordsRepostitory = $keywordsRepostitory;
-	}
+	protected $keywordsRepository;
 
 	/**
 	 * List all Keywords
 	 */
 	public function listAction() {
-		$keywords = $this->keywordsRepostitory->findAll();
+		$keywords = $this->keywordsRepository->findAll();
 		$this->view->assign('keywords', $keywords);
 	}
 
@@ -67,7 +59,7 @@ class Tx_Nkwkeywords_Controller_KeywordsController extends Tx_Extbase_MVC_Contro
 		$this->view->assignMultiple(
 			array(
 				'header' => $newHeader,
-				'keyword' => $keyword
+				'keyword' => $keyword,
 			)
 		);
 

@@ -29,7 +29,7 @@
  * Model for Project Keywords
  *
  * @author Ingo Pfennigstorf <pfennigstorf@sub-goettingen.de>, Goettingen State Library
- * $Id: Keywords.php 1684 2012-02-21 15:50:49Z pfennigstorf $
+ * $Id: Keywords.php 1920 2012-08-22 13:23:46Z pfennigstorf $
  */
 class Tx_Nkwkeywords_Domain_Model_Keywords extends Tx_Extbase_DomainObject_AbstractEntity {
 

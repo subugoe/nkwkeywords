@@ -1,6 +1,0 @@
-lib.nkwkeywords.keywordTitle = TEXT
-lib.nkwkeywords.keywordTitle {
-	dataWrap = DB:tx_nkwkeywords_keywords:{GP:tx_nkwkeywords|id}:title_de
-	wrap3 = {|}
-	insertData = 1
-}

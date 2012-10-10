@@ -29,7 +29,7 @@ CREATE TABLE tx_nkwkeywords_domain_model_keywords (
 # Table structure for table 'pages'
 #
 CREATE TABLE pages (
-	tx_nkwkeywords_keywords int(11) DEFAULT '0' NOT NULL
+#	tx_nkwkeywords_keywords int(11) DEFAULT '0' NOT NULL
 );
 
 #

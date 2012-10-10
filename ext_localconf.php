@@ -41,6 +41,8 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 			'Keywords' => 'detail',
 		)
 );
-$TYPO3_CONF_VARS['FE']['eID_include']['keyfix'] = 'EXT:nkwkeywords/Resources/Private/Scripts/LocalizationFixer.php';
+
+// $TYPO3_CONF_VARS['FE']['eID_include']['keyfix'] = 'EXT:nkwkeywords/Resources/Private/Scripts/LocalizationFixer.php';
+// $TYPO3_CONF_VARS['FE']['eID_include']['keyassign'] = 'EXT:nkwkeywords/Resources/Private/Scripts/Reassign.php';
 
 ?>

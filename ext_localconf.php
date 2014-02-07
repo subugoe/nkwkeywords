@@ -25,24 +25,6 @@
 if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
-
-Tx_Extbase_Utility_Extension::configurePlugin(
-		$_EXTKEY,
-		'list',
-		array(
-			'Keywords' => 'list',
-		)
-);
-
-Tx_Extbase_Utility_Extension::configurePlugin(
-		$_EXTKEY,
-		'keyword',
-		array(
-			'Keywords' => 'detail',
-		)
-);
-
-// $TYPO3_CONF_VARS['FE']['eID_include']['keyfix'] = 'EXT:nkwkeywords/Resources/Private/Scripts/LocalizationFixer.php';
-// $TYPO3_CONF_VARS['FE']['eID_include']['keyassign'] = 'EXT:nkwkeywords/Resources/Private/Scripts/Reassign.php';
-
+t3lib_extMgm::addPItoST43($_EXTKEY, 'pi2/class.tx_nkwkeywords_pi2.php', '_pi2', 'list_type', 1);
+t3lib_extMgm::addPItoST43($_EXTKEY, 'pi3/class.tx_nkwkeywords_pi3.php', '_pi3', 'list_type', 1);
 ?>

@@ -1,6 +1,0 @@
-plugin.tx_nkwkeywords {
-	persistence {
-		# cat=plugin.tx_nkwkeywords//a; type=int+; label=Default storage PID
-		storagePid = 
-	}
-}

@@ -12,16 +12,16 @@
 
 $EM_CONF[$_EXTKEY] = array(
 	'title' => 'nkwkeywords',
-	'description' => 'Add, edit and display keywords that are assigned to a page',
+	'description' => '',
 	'category' => 'plugin',
-	'author' => 'Nils K. Windisch, Ingo Pfennigstorf',
-	'author_email' => 'www@sub.uni-goettingen.de',
+	'author' => 'Nils K. Windisch',
+	'author_email' => 'windisch@sub.uni-goettingen.de',
 	'shy' => '',
-	'dependencies' => '',
+	'dependencies' => 'nkwlib',
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
-	'state' => 'beta',
+	'state' => 'alpha',
 	'internal' => '',
 	'uploadfolder' => 0,
 	'createDirs' => '',
@@ -29,11 +29,10 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => 'Goettingen State and University Library, Germany http://www.sub.uni-goettingen.de',
-	'version' => '2.0.0',
+	'version' => '0.0.29W',
 	'constraints' => array(
 		'depends' => array(
-			'extbase' => '',
-			'fluid' => '',
+			'nkwlib' => '',
 		),
 		'conflicts' => array(
 		),

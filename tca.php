@@ -24,12 +24,12 @@
 if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
-$TCA['tx_nkwkeywords_domain_model_keywords'] = array(
-	'ctrl' => $TCA['tx_nkwkeywords_domain_model_keywords']['ctrl'], 
+$TCA['tx_nkwkeywords_keywords'] = array(
+	'ctrl' => $TCA['tx_nkwkeywords_keywords']['ctrl'], 
 	'interface' => array(
-		'showRecordFieldList' => 'l18n_parent, l18n_diffsource, title, pages'
+		'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,title_de,title_en,title'
 	),
-	'feInterface' => $TCA['tx_nkwkeywords_domain_model_keywords']['feInterface'],
+	'feInterface' => $TCA['tx_nkwkeywords_keywords']['feInterface'],
 	'columns' => array(
 		'sys_language_uid' => array(
 			'exclude' => 1, 
@@ -44,52 +44,36 @@ $TCA['tx_nkwkeywords_domain_model_keywords'] = array(
 				)
 			)
 		),
-		'l18n_parent' => array(
+		'l10n_parent' => array(
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
 			'exclude'     => 1,
 			'label'       => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
 			'config'      => array(
 				'type'  => 'select',
 				'items' => array(array('', 0)),
-				'foreign_table'       => 'tx_nkwkeywords_domain_model_keywords',
-				'foreign_table_where' => 'AND tx_nkwkeywords_domain_model_keywords.pid=###CURRENT_PID### AND tx_nkwkeywords_domain_model_keywords.sys_language_uid IN (-1,0)',
+				'foreign_table'       => 'tx_nkwkeywords_keywords',
+				'foreign_table_where' => 'AND tx_nkwkeywords_keywords.pid=###CURRENT_PID### AND tx_nkwkeywords_keywords.sys_language_uid IN (-1,0)',
 			)
 		),
-		'l18n_diffsource' => array(
-			'config' => array(
-				'type' => 'passthrough'
-			)
+		'l10n_diffsource' => array('config' => array('type' => 'passthrough')),
+		'title_de' => array(
+			'exclude' => 1, 
+			'label' => 'LLL:EXT:nkwkeywords/locallang_db.xml:tx_nkwkeywords_keywords.title_de', 
+			'config' => array('type' => 'input', 'size' => '30', 'eval' => 'required,trim')
+		),
+		'title_en' => array(
+			'exclude' => 1, 
+			'label' => 'LLL:EXT:nkwkeywords/locallang_db.xml:tx_nkwkeywords_keywords.title_en', 
+			'config' => array('type' => 'input', 'size' => '30', 'eval' => 'required,trim')
 		),
 		'title' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:nkwkeywords/locallang_db.xml:tx_nkwkeywords_domain_model_keywords.title',
+			'exclude' => 1, 
+			'label' => 'LLL:EXT:nkwkeywords/locallang_db.xml:tx_nkwkeywords_keywords.title',		
 			'config' => array('type' => 'text', 'wrap' => 'OFF', 'cols' => '30', 'rows' => '1')
-		),
-		'pages' => array(
-			'exclude' => 1,
-			'label' => 'LLL:EXT:nkwkeywords/Resources/Private/Language/locallang_db.xml:pages.tx_nkwkeywords_domain_model_keywords',
-			'config' => array(
-				'type' => 'select',
-				'MM_opposite_field' => 'keywords',
-				'foreign_table' => 'pages',
-				'foreign_table_where' => ' ORDER BY pages.title ASC',
-				'sortby' => 'pages.title',
-				'default_sortby' => ' ORDER BY pages.title ASC',
-				'MM' => 'tx_nkwkeywords_pages_keywords_mm',
-				'maxitems' => 9999,
-				'size'=> 10,
-				'appearance' => array(
-					'collapse' => 0,
-					'levelLinksPosition' => 'both',
-					'showSynchronizationLink' => 1,
-					'showPossibleLocalizationRecords' => 1,
-					'showAllLocalizationLink' => 1
-				),
-			),
 		),
 	),
 	'types' => array(
-		'0' => array('showitem' => 'l18n_parent, l18n_diffsource, title, pages')
+		'0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, title_de, title_en, title;;;;2-2-2')
 	),
 	'palettes' => array('1' => array('showitem' => ''))
 );

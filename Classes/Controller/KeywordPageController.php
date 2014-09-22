@@ -22,38 +22,42 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-require_once(PATH_tslib. 'class.tslib_pibase.php');
-require_once(t3lib_extMgm::extPath('nkwlib') . 'class.tx_nkwlib.php');
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('nkwlib') . 'class.tx_nkwlib.php');
 
 /**
  * Plugin 'Keywordpage' for the 'nkwkeywords' extension.
  *
- * @author	Nils K. Windisch <windisch@sub.uni-goettingen.de>
- * @package	TYPO3
- * @subpackage	tx_nkwkeywords
+ * @author    Nils K. Windisch <windisch@sub.uni-goettingen.de>
+ * @package    TYPO3
+ * @subpackage    tx_nkwkeywords
  */
-class tx_nkwkeywords_pi3 extends tslib_pibase {
+class KeywordPageController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 
-	var $prefixId = 'tx_nkwkeywords_pi3';
-	var $scriptRelPath = 'pi3/class.tx_nkwkeywords_pi3.php';
-	var $extKey = 'nkwkeywords';
-	var $pi_checkCHash = true;
+	public $prefixId = 'tx_nkwkeywords_pi3';
+	public $scriptRelPath = 'pi3/class.tx_nkwkeywords_pi3.php';
+	public $extKey = 'nkwkeywords';
+	public $pi_checkCHash = true;
 
 	protected $keyWordId;
 	protected $lang;
 
-	function main($content, $conf) {
-			// basics
+	/**
+	 * @param $content
+	 * @param $conf
+	 * @return string
+	 */
+	public function main($content, $conf) {
+		// basics
 		$this->conf = $conf;
 		$this->pi_setPiVarDefaults();
 		$this->pi_loadLL();
-		$this->lang = tx_nkwlib::getLanguage();
-			// get vars
-		$getVars = t3lib_div::_GP("tx_nkwkeywords");
-			// get pages with keyword
-		if (t3lib_div::testInt($getVars['id'])) {
+		$this->lang = $GLOBALS['TSFE']->sys_page->sys_language_uid;
+		// get vars
+		$getVars = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP("tx_nkwkeywords");
+		// get pages with keyword
+		if (\TYPO3\CMS\Core\Utility\MathUtility::canBeInterpretedAsInteger($getVars['id'])) {
 			$this->keyWordId = $getVars['id'];
-				// get data
+			// get data
 			$res1 = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
 					'*',
 					'pages',
@@ -61,13 +65,13 @@ class tx_nkwkeywords_pi3 extends tslib_pibase {
 					'',
 					'title ASC',
 					'');
-				// helper
+			// helper
 			$i = 0;
-				// get data
+			// get data
 			while ($row1 = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res1)) {
 				$arrPages[$i]['uid'] = $row1['uid'];
 				$arrPages[$i]['title'] = $row1['title'];
-					// get page title for any language other than 0
+				// get page title for any language other than 0
 				if ($this->lang != 0) {
 					$arrPages[$i]['title'] = tx_nkwlib::getPageTitle($row1['uid'], $this->lang);
 				}
@@ -75,9 +79,9 @@ class tx_nkwkeywords_pi3 extends tslib_pibase {
 				$i++;
 			}
 		}
-			// are there any associated pages?
+		// are there any associated pages?
 		if (sizeof($arrPages) >= 1) {
-			
+
 			$tmpContent = '<h2>' . $this->getKeyword() . '</h2>';
 			$tmpContent .= '<ul>';
 			foreach ($arrPages AS $key1 => $value1) {
@@ -86,7 +90,7 @@ class tx_nkwkeywords_pi3 extends tslib_pibase {
 				$GLOBALS['TSFE']->ATagParams = ' title = "' . $value1['title'] . '"'; // evil T3 URL hack
 				$tmpContent .= $this->pi_LinkToPage($value1['title'], $value1['uid'], '', '');
 				$GLOBALS['TSFE']->ATagParams = $saveATagParams; // evil T3 URL hack
-					// show parent page only if there is a valid one
+				// show parent page only if there is a valid one
 				if ($value1['pid']) {
 					$parent = tx_nkwlib::pageInfo($value1['pid'], $this->lang);
 					if ($parent['title']) {
@@ -104,7 +108,7 @@ class tx_nkwkeywords_pi3 extends tslib_pibase {
 		} else {
 			$tmpContent .= '<p>' . $this->pi_getLL('nocontent') . '</p>';
 		}
-			// return
+		// return
 		$content = $tmpContent;
 		return $this->pi_wrapInBaseClass($content);
 	}
@@ -116,12 +120,12 @@ class tx_nkwkeywords_pi3 extends tslib_pibase {
 	 */
 	protected function getKeyword() {
 		$keywordQuery = $GLOBALS['TYPO3_DB']->exec_SELECTquery(
-							'title_de, title_en, uid',
-							'tx_nkwkeywords_keywords',
-							'uid = ' . $this->keyWordId,
-							'',
-							'',
-							'');
+				'title_de, title_en, uid',
+				'tx_nkwkeywords_keywords',
+				'uid = ' . $this->keyWordId,
+				'',
+				'',
+				'');
 
 		$keywordResult = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($keywordQuery);
 
@@ -131,9 +135,3 @@ class tx_nkwkeywords_pi3 extends tslib_pibase {
 	}
 
 }
-
-if (defined('TYPO3_MODE')
-		&& $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/nkwkeywords/pi3/class.tx_nkwkeywords_pi3.php']) {
-	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/nkwkeywords/pi3/class.tx_nkwkeywords_pi3.php']);
-}
-?>

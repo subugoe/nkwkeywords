@@ -22,3 +22,21 @@ CREATE TABLE tx_nkwkeywords_keywords (
 CREATE TABLE pages (
 	tx_nkwkeywords_keywords text
 );
+
+#
+# mm table for pages and keywords
+#
+CREATE TABLE tx_nkwkeywords_pages_keywords_mm (
+  uid int(11) NOT NULL auto_increment,
+  pid int(11) NOT NULL DEFAULT '0',
+  uid_local int(11) NOT NULL DEFAULT '0',
+  uid_foreign int(11) NOT NULL DEFAULT '0',
+  sorting int(11) NOT NULL DEFAULT '0',
+  sorting_foreign int(11) NOT NULL DEFAULT '0',
+  tstamp int(11) NOT NULL DEFAULT '0',
+  crdate int(11) NOT NULL DEFAULT '0',
+  hidden tinyint(3) unsigned DEFAULT '0',
+
+  PRIMARY KEY (uid),
+  KEY parent (pid)
+);

@@ -40,3 +40,18 @@ CREATE TABLE tx_nkwkeywords_pages_keywords_mm (
   PRIMARY KEY (uid),
   KEY parent (pid)
 );
+
+#
+# Table structure for table 'sys_category'
+#
+CREATE TABLE sys_category (
+	_migratedkeywordcatuid int(11) unsigned DEFAULT '0' NOT NULL
+);
+
+
+#
+# Table structure for table 'sys_category_record_mm'
+#
+CREATE TABLE sys_category_record_mm (
+	_migratedkeywordcatuid int(11) unsigned DEFAULT '0' NOT NULL
+);

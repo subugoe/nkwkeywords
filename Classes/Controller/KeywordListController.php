@@ -1,4 +1,5 @@
 <?php
+namespace Subugoe\Nkwkeywords\Controller;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,10 +25,11 @@
 
 /**
  * Plugin 'Keywordlist' for the 'nkwkeywords' extension.
+ * @deprecated
  */
 class KeywordListController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
-	var $prefixId = 'tx_nkwkeywords_pi2';
-	var $scriptRelPath = 'pi2/class.tx_nkwkeywords_pi2.php';
+	var $prefixId = 'KeywordListController';
+	var $scriptRelPath = 'Classes/Controller/KeywordListController.php';
 	var $extKey = 'nkwkeywords';
 	var $pi_checkCHash = true;
 
@@ -42,12 +44,12 @@ class KeywordListController extends \TYPO3\CMS\Frontend\Plugin\AbstractPlugin {
 		if (!preg_match("[\200-\237]", $string) and !preg_match("[\241-\377]", $string)) {
 			return $string;
 		}
-		// decode three byte unicode characters 
+		// decode three byte unicode characters
 		$string = preg_replace(
 				"/([\340-\357])([\200-\277])([\200-\277])/e",
 				"'&#'.((ord('\\1')-224)*4096 + (ord('\\2')-128)*64 + (ord('\\3')-128)).';'",
 				$string);
-		// decode two byte unicode characters 
+		// decode two byte unicode characters
 		$string = preg_replace(
 				"/([\300-\337])([\200-\277])/e",
 				"'&#'.((ord('\\1')-192)*64+(ord('\\2')-128)).';'",

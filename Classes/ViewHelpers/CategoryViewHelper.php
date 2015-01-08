@@ -1,15 +1,18 @@
 <?php
+namespace Subugoe\Nkwkeywords\ViewHelpers;
 
 /* * *************************************************************
  *  Copyright notice
  *
- *  (c) 2010 Nils K. Windisch <windisch@sub.uni-goettingen.de>
+ *  (c) 2015 Ingo Pfennigstorf <pfennigstorf@sub-goettingen.de>
+ *      Goettingen State Library
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -22,16 +25,26 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
+/**
+ * View helper for getting all pages for a specific category
+ */
+class CategoryViewHelper extends AbstractViewHelper {
+
+	/**
+	 * @param int $category
+	 * @return void
+	 */
+	public function render($category) {
+		$collection = \TYPO3\CMS\Frontend\Category\Collection\CategoryCollection::load(
+				$category,
+				TRUE,
+				'pages',
+				'categories'
+		);
+
+		$this->templateVariableContainer->add('entries', $collection);
+
+	}
 }
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43('Subugoe.' . $_EXTKEY, 'Classes/Controller/KeywordListController.php', '_pi2', 'list_type', 1);
-
-
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'Subugoe.' . $_EXTKEY,
-	'list',
-	array (
-		'Keyword' => 'list, detail'
-	)
-);

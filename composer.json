@@ -1,0 +1,27 @@
+{
+  "name": "subugoe/nkwkeywords",
+  "description": "Category frontend for TYPO3",
+  "autoload": {
+	"psr-4": {
+	  "Subugoe\\Nkwkeywords\\": "Classes/"
+	},
+	"classmap": [
+	  "Tests/",
+	  "vendor/typo3/cms/typo3/sysext"
+	]
+  },
+  "replace": {
+	"typo3/cms-composer-installers": "*"
+  },
+  "require-dev": {
+	"codeception/codeception": "~2.0",
+	"typo3/cms": "~6.2"
+  },
+  "license": "GPL",
+  "authors": [
+	{
+	  "name": "Ingo Pfennigstorf",
+	  "email": "i.pfennigstorf@gmail.com"
+	}
+  ]
+}

@@ -4,4 +4,10 @@ plugin.tx_nkwkeywords {
 	persistence {
 		storagePid = 294
 	}
+	view {
+		defaultPid = auto
+	}
+	features {
+		skipDefaultArguments = 1
+	}
 }

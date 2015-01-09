@@ -1,19 +1,19 @@
 {namespace s=Subugoe\Nkwkeywords\ViewHelpers}
 
 <div class="sub-az">
-	<ul class="letterNavi">
+	<ul class="letterNavi pagination">
 		<f:for each="{titles}" as="title" key="letter" iteration="titleIteration">
 				<li><f:link.page section="{cId}-{letter}" noCacheHash="TRUE">{letter}</f:link.page>&nbsp;<span class="pipe">|</span></li>
 		</f:for>
 	</ul>
 
-	<ol>
+	<ul>
 		<f:for each="{titles}" as="title" key="letter" iteration="titleIteration">
 			<li class="subletter" id="{cId}-{letter}">{letter}</li>
-			<ol class="subletter-{letter} subletter-list">
-				<f:render partial="{linkPartialName}" arguments="{_all}"/>
-			</ol>
+			<ul class="subletter-{letter} subletter-list">
+				<f:render partial="{linkPartialName}" arguments="{titles: title}"/>
+			</ul>
 		</f:for>
-	</ol>
+	</ul>
 
 </div>

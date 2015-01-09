@@ -25,13 +25,19 @@
 if (!defined('TYPO3_MODE')) {
 	die('Access denied.');
 }
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPItoST43('Subugoe.' . $_EXTKEY, 'Classes/Controller/KeywordListController.php', '_pi2', 'list_type', 1);
-
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	'Subugoe.' . $_EXTKEY,
 	'list',
 	array (
-		'Keyword' => 'list, detail'
+		'Keyword' => 'list'
+	)
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Subugoe.' . $_EXTKEY,
+	'detail',
+	array (
+		'Keyword' => 'detail'
 	)
 );

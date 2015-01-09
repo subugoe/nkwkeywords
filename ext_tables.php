@@ -41,17 +41,6 @@ $TCA['tx_nkwkeywords_keywords'] = array(
 		),
 );
 
-$TCA['tt_content']['types']['list']['subtypes_excludelist'][$_EXTKEY . '_pi2'] = 'layout,select_key,pages';
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$_EXTKEY . '_pi2'] = 'pi_flexform';
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($_EXTKEY . '_pi2', 'FILE:EXT:nkwkeywords/Configuration/FlexForms/KeywordListFlexform.xml');
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPlugin(
-		array(
-				'LLL:EXT:nkwkeywords/locallang_db.xml:tt_content.list_type_pi2',
-				$_EXTKEY . '_pi2',
-				\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/ext_icon.gif'), 'list_type');
-
 $tempColumns = array(
 		'tx_nkwkeywords_keywords' => array(
 				'exclude' => 0,
@@ -75,6 +64,13 @@ $tempColumns = array(
 	'Subugoe.' . $_EXTKEY,
 	'list',
 	'Keyword Listr'
+);
+
+// Keyword detail view
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+	'Subugoe.' . $_EXTKEY,
+	'detail',
+	'Keyword Detail'
 );
 
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = 'Subugoe\\Nkwkeywords\\Command\\CategoryCommandController';

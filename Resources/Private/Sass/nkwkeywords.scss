@@ -1,0 +1,14 @@
+$border-color: #000;
+
+.tx-nkwkeywords {
+	.sub-az {
+		.letterNavi {
+			span.pipe {
+				color: lighten($border-color, 20%);
+			}
+			a {
+				text-decoration: none;
+			}
+		}
+	}
+}

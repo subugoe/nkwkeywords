@@ -1,1 +1,3 @@
-<f:debug>{letter}</f:debug>
+<f:for each="{titles}" as="title">
+	<li><f:link.action title="{title.description}" arguments="{category: title.uid}" pluginName="detail" controller="Keyword">{title.title}</f:link.action></li>
+</f:for>

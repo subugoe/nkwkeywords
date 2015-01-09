@@ -2,18 +2,9 @@
 Keywords
 ========
 
-- Page: Systemordner "Keywords" anlegen, (A)
-- ext:nkwkeywords installieren
-- Page: Schlagworte mit Plugin "Keywordslist"
-- Page: Schlagwort mit Plugin "Keywordpage", (B)
+Installation
+============
 
-  - Title des Plugins = hidden
-
-- Page TS Constants
-
-  - keywordslandingpage = (UID des Seite B)
-  - keywordssavehere = (UID des Systemordners A)
-
-- Nutzerrechte einrichten
-
-  - Options Tab der Root Page: TSConfig: "mod.web_txnkwkeywordsM1.savehere = ###"
+- Specify the storagePid in TypoScript configuration where the categories are stored
+- Create a page with plugin type "Keyword Listr" for the list of the Keywords
+- Create a page with plugin type "Keyword Details" for the detail view of a keyword

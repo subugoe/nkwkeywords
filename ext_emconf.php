@@ -14,10 +14,9 @@ $EM_CONF[$_EXTKEY] = array(
 	'title' => 'nkwkeywords',
 	'description' => '',
 	'category' => 'plugin',
-	'author' => 'Nils K. Windisch',
-	'author_email' => 'windisch@sub.uni-goettingen.de',
+	'author' => 'Ingo Pfennigstorf & Nils K. Windisch',
+	'author_email' => 'pfennigstorf@sub.uni-goettingen.de',
 	'shy' => '',
-	'dependencies' => 'nkwlib',
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
@@ -32,7 +31,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'version' => '2.0.0',
 	'constraints' => array(
 		'depends' => array(
-			'nkwlib' => '',
+			'typo3' => '6.2.0-6.2.99',
 		),
 		'conflicts' => array(
 		),

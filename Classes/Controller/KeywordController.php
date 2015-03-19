@@ -41,12 +41,18 @@ class KeywordController extends ActionController {
 	 */
 	protected $categoryRepository;
 
+	/**
+	 * @return void
+	 */
 	public function initializeAction() {
 		/** @var \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer */
 		$pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
 		$pageRenderer->addCssFile(ExtensionManagementUtility::extRelPath('nkwkeywords') . 'Resources/Public/Css/nkwkeywords.css');
 	}
 
+	/**
+	 * @return void
+	 */
 	public function listAction() {
 		$this->categoryRepository->setDefaultOrderings(
 				array(
@@ -57,6 +63,10 @@ class KeywordController extends ActionController {
 		$this->view->assign('categories', $categories);
 	}
 
+	/**
+	 * @param Category $category
+	 * @return void
+	 */
 	public function detailAction(Category $category) {
 		$this->view->assign('category', $category);
 	}

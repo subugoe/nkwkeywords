@@ -1,6 +1,7 @@
 {
   "name": "subugoe/nkwkeywords",
   "description": "Category frontend for TYPO3",
+  "type": "typo3-cms-extension",
   "autoload": {
 	"psr-4": {
 	  "Subugoe\\Nkwkeywords\\": "Classes/"

@@ -26,6 +26,7 @@ namespace Subugoe\Nkwkeywords\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3\CMS\Frontend\Category\Collection\CategoryCollection;
 
 /**
  * View helper for getting all pages for a specific category
@@ -37,7 +38,7 @@ class CategoryViewHelper extends AbstractViewHelper {
 	 * @return void
 	 */
 	public function render($category) {
-		$collection = \TYPO3\CMS\Frontend\Category\Collection\CategoryCollection::load(
+		$collection = CategoryCollection::load(
 				$category,
 				TRUE,
 				'pages',

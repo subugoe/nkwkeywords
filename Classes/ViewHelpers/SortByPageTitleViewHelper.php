@@ -25,9 +25,7 @@ namespace Subugoe\Nkwkeywords\ViewHelpers;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Frontend\Page\PageRepository;
 
 /**
  * View helper for sorting a bunch of pages by title
@@ -41,12 +39,31 @@ class SortByPageTitleViewHelper extends AbstractViewHelper {
 	public function render($pages) {
 
 		$pages = $pages->getItems();
+
+		// only show non-sysfolders
+		$pages = array_filter($pages, array($this, 'getPages'));
+
 		uasort($pages, array($this, 'sortByTitle'));
 
 		$this->templateVariableContainer->add('pages', $pages);
 	}
 
+	/**
+	 * @param array $a
+	 * @param array $b
+	 * @return int
+	 */
 	protected function sortByTitle($a, $b) {
 		return ($a['title'] < $b['title']) ? -1 : 1;
+	}
+
+	/**
+	 * filter sys-folders from pages array
+	 *
+	 * @param array $page
+	 * @return bool
+	 */
+	protected function getPages($page) {
+		return ($page['doktype'] != 254);
 	}
 }

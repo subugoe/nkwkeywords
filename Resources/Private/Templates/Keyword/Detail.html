@@ -7,8 +7,10 @@
 
 	<h3>{category.title}</h3>
 
+	<s:sortByPageTitle pages="{entries}" />
+
 	<ul>
-		<f:for each="{entries}" as="entry">
+		<f:for each="{pages}" as="entry">
 			<li><f:link.page pageUid="{entry.uid}" title="{entry.description}">{entry.title}</f:link.page> (<s:pageTitle pid="{entry.pid}" />)</li>
 		</f:for>
 	</ul>

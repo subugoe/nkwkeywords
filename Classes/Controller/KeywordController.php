@@ -47,7 +47,7 @@ class KeywordController extends ActionController {
 	public function initializeAction() {
 		/** @var \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer */
 		$pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
-		$pageRenderer->addCssFile(ExtensionManagementUtility::extRelPath('nkwkeywords') . 'Resources/Public/Css/nkwkeywords.css');
+		$pageRenderer->addCssFile(ExtensionManagementUtility::siteRelPath('nkwkeywords') . 'Resources/Public/Css/nkwkeywords.css');
 	}
 
 	/**

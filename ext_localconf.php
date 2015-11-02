@@ -23,21 +23,21 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 if (!defined('TYPO3_MODE')) {
-	die('Access denied.');
+    die('Access denied.');
 }
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'Subugoe.' . $_EXTKEY,
-	'list',
-	array (
-		'Keyword' => 'list'
-	)
+    'Subugoe.' . $_EXTKEY,
+    'list',
+    [
+        'Keyword' => 'list'
+    ]
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-	'Subugoe.' . $_EXTKEY,
-	'detail',
-	array (
-		'Keyword' => 'detail'
-	)
+    'Subugoe.' . $_EXTKEY,
+    'detail',
+    [
+        'Keyword' => 'detail'
+    ]
 );

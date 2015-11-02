@@ -5,6 +5,5 @@ define('PATH_thisScript', realpath('vendor/typo3/cms/typo3/index.php'));
 define('TYPO3_MODE', 'BE');
 putenv('TYPO3_CONTEXT=Testing');
 \TYPO3\CMS\Core\Core\Bootstrap::getInstance()
-	->baseSetup('typo3/')
-	->disableCoreAndClassesCache()
-;
+    ->baseSetup('typo3/')
+    ->disableCoreAndClassesCache();

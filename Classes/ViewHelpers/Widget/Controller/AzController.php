@@ -29,96 +29,103 @@ use TYPO3\CMS\Core\Utility\ArrayUtility;
 /**
  * A - Z Index generator and lister
  */
-class AzController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController {
+class AzController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController
+{
 
-	/**
-	 * @var array
-	 */
-	protected $configuration = array(
-			'titleField' => 'title',
-			'linkObject' => '',
-			'linkAction' => '',
-			'linkController' => '',
-			'linkPluginName' => '',
-			'linkExtensionName' => ''
-	);
+    /**
+     * @var array
+     */
+    protected $configuration = [
+        'titleField' => 'title',
+        'linkObject' => '',
+        'linkAction' => '',
+        'linkController' => '',
+        'linkPluginName' => '',
+        'linkExtensionName' => ''
+    ];
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-	 */
-	protected $objects;
+    /**
+     * @var \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    protected $objects;
 
-	/**
-	 * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
-	 */
-	protected $cObj;
+    /**
+     * @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer
+     */
+    protected $cObj;
 
-	/**
-	 * @return void
-	 */
-	public function initializeAction() {
-		$this->objects = $this->widgetConfiguration['objects'];
-		ArrayUtility::mergeRecursiveWithOverrule($this->configuration, $this->widgetConfiguration['configuration'], FALSE);
-		$this->cObj = $this->configurationManager->getContentObject();
-	}
+    /**
+     * @return void
+     */
+    public function initializeAction()
+    {
+        $this->objects = $this->widgetConfiguration['objects'];
+        ArrayUtility::mergeRecursiveWithOverrule($this->configuration, $this->widgetConfiguration['configuration'],
+            FALSE);
+        $this->cObj = $this->configurationManager->getContentObject();
+    }
 
-	/**
-	 * Generate titles, indexes and assign this to the view
-	 *
-	 * @return void
-	 */
-	public function indexAction() {
+    /**
+     * Generate titles, indexes and assign this to the view
+     *
+     * @return void
+     */
+    public function indexAction()
+    {
 
-		// merge configuration with custom adoptions
-		$customConfiguration = array(
-				'titles' => $this->getAzGrouping($this->objects),
-				'linkPartialName' => $this->configuration['linkController'] . 'List',
-				'cId' => $this->cObj->data['uid']
-		);
-		$configuration = array_merge($customConfiguration, $this->configuration);
+        // merge configuration with custom adoptions
+        $customConfiguration = [
+            'titles' => $this->getAzGrouping($this->objects),
+            'linkPartialName' => $this->configuration['linkController'] . 'List',
+            'cId' => $this->cObj->data['uid']
+        ];
+        $configuration = array_merge($customConfiguration, $this->configuration);
 
-		$this->view->assignMultiple($configuration);
-	}
+        $this->view->assignMultiple($configuration);
+    }
 
-	/**
-	 * Groups the titles to their indexes
-	 *
-	 * @param $titles
-	 * @return array
-	 */
-	protected function getAzGrouping($titles) {
+    /**
+     * Groups the titles to their indexes
+     *
+     * @param $titles
+     * @return array
+     */
+    protected function getAzGrouping($titles)
+    {
 
-		$groupings = array();
+        $groupings = [];
 
-		$lastChar = '';
-		foreach ($titles as $title) {
+        $lastChar = '';
+        foreach ($titles as $title) {
 
-			// find titleField and get contents
-			$objectTitle = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($title, $this->configuration['titleField']);
+            // find titleField and get contents
+            $objectTitle = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($title,
+                $this->configuration['titleField']);
 
-			$title->linkObject = array($this->configuration['linkObject'] => $title->getUid());
+            $title->linkObject = [$this->configuration['linkObject'] => $title->getUid()];
 
-			$firstLetter = $this->getSpecifiedLetter($objectTitle, 0);
+            $firstLetter = $this->getSpecifiedLetter($objectTitle, 0);
 
-			if ($firstLetter != $lastChar) {
-				$groupings[$firstLetter] = array();
-			}
-			array_push($groupings[$firstLetter], $title);
+            if ($firstLetter != $lastChar) {
+                $groupings[$firstLetter] = [];
+            }
+            array_push($groupings[$firstLetter], $title);
 
-			$lastChar = $this->getSpecifiedLetter($objectTitle, 0);
-		}
+            $lastChar = $this->getSpecifiedLetter($objectTitle, 0);
+        }
 
-		return $groupings;
-	}
+        return $groupings;
+    }
 
-	/**
-	 * Returns the letter from a given index of a string
-	 *
-	 * @param $title
-	 * @param $index
-	 * @return string
-	 */
-	protected function getSpecifiedLetter($title, $index) {
-		return mb_substr(mb_strtoupper(iconv('utf-8', 'ascii//TRANSLIT', $title)), $index, $index + 1, 'utf-8');
-	}
+    /**
+     * Returns the letter from a given index of a string
+     *
+     * @param $title
+     * @param $index
+     * @return string
+     */
+    protected function getSpecifiedLetter($title, $index)
+    {
+        return mb_substr(mb_strtoupper(iconv('utf-8', 'ascii//TRANSLIT', $title)), $index, $index + 1, 'utf-8');
+    }
 }

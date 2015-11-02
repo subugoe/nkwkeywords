@@ -30,40 +30,43 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 /**
  * View helper for sorting a bunch of pages by title
  */
-class SortByPageTitleViewHelper extends AbstractViewHelper {
+class SortByPageTitleViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * @param \TYPO3\CMS\Frontend\Category\Collection\CategoryCollection $pages
-	 * @return void
-	 */
-	public function render($pages) {
+    /**
+     * @param \TYPO3\CMS\Frontend\Category\Collection\CategoryCollection $pages
+     */
+    public function render($pages)
+    {
 
-		$pages = $pages->getItems();
+        $pages = $pages->getItems();
 
-		// only show non-sysfolders
-		$pages = array_filter($pages, array($this, 'getPages'));
+        // only show non-sysfolders
+        $pages = array_filter($pages, [$this, 'getPages']);
 
-		uasort($pages, array($this, 'sortByTitle'));
+        uasort($pages, [$this, 'sortByTitle']);
 
-		$this->templateVariableContainer->add('pages', $pages);
-	}
+        $this->templateVariableContainer->add('pages', $pages);
+    }
 
-	/**
-	 * @param array $a
-	 * @param array $b
-	 * @return int
-	 */
-	protected function sortByTitle($a, $b) {
-		return ($a['title'] < $b['title']) ? -1 : 1;
-	}
+    /**
+     * @param array $a
+     * @param array $b
+     * @return int
+     */
+    protected function sortByTitle($a, $b)
+    {
+        return ($a['title'] < $b['title']) ? -1 : 1;
+    }
 
-	/**
-	 * filter sys-folders from pages array
-	 *
-	 * @param array $page
-	 * @return bool
-	 */
-	protected function getPages($page) {
-		return ($page['doktype'] != 254);
-	}
+    /**
+     * filter sys-folders from pages array
+     *
+     * @param array $page
+     * @return bool
+     */
+    protected function getPages($page)
+    {
+        return ($page['doktype'] != 254);
+    }
 }

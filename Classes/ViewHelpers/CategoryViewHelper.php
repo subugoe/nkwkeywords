@@ -31,21 +31,22 @@ use TYPO3\CMS\Frontend\Category\Collection\CategoryCollection;
 /**
  * View helper for getting all pages for a specific category
  */
-class CategoryViewHelper extends AbstractViewHelper {
+class CategoryViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * @param int $category
-	 * @return void
-	 */
-	public function render($category) {
-		$collection = CategoryCollection::load(
-				$category,
-				TRUE,
-				'pages',
-				'categories'
-		);
+    /**
+     * @param int $category
+     */
+    public function render($category)
+    {
+        $collection = CategoryCollection::load(
+            $category,
+            TRUE,
+            'pages',
+            'categories'
+        );
 
-		$this->templateVariableContainer->add('entries', $collection);
+        $this->templateVariableContainer->add('entries', $collection);
 
-	}
+    }
 }

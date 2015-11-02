@@ -26,6 +26,7 @@ namespace Subugoe\Nkwkeywords\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
@@ -33,42 +34,39 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 /**
  * Controller for Categories
  */
-class KeywordController extends ActionController {
+class KeywordController extends ActionController
+{
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
-	 * @inject
-	 */
-	protected $categoryRepository;
+    /**
+     * @var \TYPO3\CMS\Extbase\Domain\Repository\CategoryRepository
+     * @inject
+     */
+    protected $categoryRepository;
 
-	/**
-	 * @return void
-	 */
-	public function initializeAction() {
-		/** @var \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer */
-		$pageRenderer = $GLOBALS['TSFE']->getPageRenderer();
-		$pageRenderer->addCssFile(ExtensionManagementUtility::siteRelPath('nkwkeywords') . 'Resources/Public/Css/nkwkeywords.css');
-	}
+    public function initializeAction()
+    {
+        /** @var \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer */
+        $pageRenderer = $this->objectManager->get(PageRenderer::class);
+        $pageRenderer->addCssFile(ExtensionManagementUtility::siteRelPath('nkwkeywords') . 'Resources/Public/Css/nkwkeywords.css');
+    }
 
-	/**
-	 * @return void
-	 */
-	public function listAction() {
-		$this->categoryRepository->setDefaultOrderings(
-				array(
-						'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
-				)
-		);
-		$categories = $this->categoryRepository->findAll();
-		$this->view->assign('categories', $categories);
-	}
+    public function listAction()
+    {
+        $this->categoryRepository->setDefaultOrderings(
+            [
+                'title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
+            ]
+        );
+        $categories = $this->categoryRepository->findAll();
+        $this->view->assign('categories', $categories);
+    }
 
-	/**
-	 * @param Category $category
-	 * @return void
-	 */
-	public function detailAction(Category $category) {
-		$this->view->assign('category', $category);
-	}
+    /**
+     * @param Category $category
+     */
+    public function detailAction(Category $category)
+    {
+        $this->view->assign('category', $category);
+    }
 
 }

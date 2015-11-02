@@ -26,26 +26,27 @@ namespace Subugoe\Nkwkeywords\ViewHelpers;
  *  This copyright notice MUST APPEAR in all copies of the script!
  * ************************************************************* */
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
-use TYPO3\CMS\Frontend\Page\PageRepository;
 
 /**
  * View helper for returning the page title of a pid
  */
-class PageTitleViewHelper extends AbstractViewHelper {
+class PageTitleViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * @param int $pid
-	 * @return string
-	 */
-	public function render($pid) {
+    /**
+     * @param int $pid
+     * @return string
+     */
+    public function render($pid)
+    {
 
-		/** @var \TYPO3\CMS\Frontend\Page\PageRepository $pageRepository */
-		$pageRepository = $this->objectManager->get(\TYPO3\CMS\Frontend\Page\PageRepository::class);
+        /** @var \TYPO3\CMS\Frontend\Page\PageRepository $pageRepository */
+        $pageRepository = $this->objectManager->get(\TYPO3\CMS\Frontend\Page\PageRepository::class);
 
-		$page = $pageRepository->getPage($pid);
-		$title = $page['title'];
+        $page = $pageRepository->getPage($pid);
+        $title = $page['title'];
 
-		return $title;
+        return $title;
 
-	}
+    }
 }

@@ -1,5 +1,6 @@
 plugin.tx_nkwkeywords {
 	settings {
+		excludeTheseCategories = {$excludeTheseCategories)
 	}
 	persistence {
 		storagePid = 294

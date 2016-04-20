@@ -4,7 +4,7 @@ namespace Subugoe\Nkwkeywords\ViewHelpers\Widget;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 Ingo Pfennigstorf <i,pfennigstorf@gmail.com>
+ *  (c) 2012 Ingo Pfennigstorf <pfennigstorf@sub-goettingen.de>
  *
  *  All rights reserved
  *
@@ -27,7 +27,7 @@ namespace Subugoe\Nkwkeywords\ViewHelpers\Widget;
 use TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetViewHelper;
 
 /**
- * @author Ingo Pfennigstorf <i,pfennigstorf@gmail.com>
+ * @author Ingo Pfennigstorf <pfennigstorf@sub-goettingen.de>
  */
 class AzViewHelper extends AbstractWidgetViewHelper
 {

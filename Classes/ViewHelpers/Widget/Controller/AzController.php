@@ -72,15 +72,17 @@ class AzController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController
      */
     public function indexAction()
     {
-
+        $excludeTheseCategories = [];
+        if (isset($this->settings['excludeTheseCategories']) && !empty($this->settings['excludeTheseCategories'])) {
+            $excludeTheseCategories = explode(',' , $this->settings['excludeTheseCategories']);
+        }
         // merge configuration with custom adoptions
         $customConfiguration = [
-            'titles' => $this->getAzGrouping($this->objects),
+            'titles' => $this->getAzGrouping($this->objects, $excludeTheseCategories),
             'linkPartialName' => $this->configuration['linkController'] . 'List',
             'cId' => $this->cObj->data['uid']
         ];
         $configuration = array_merge($customConfiguration, $this->configuration);
-
         $this->view->assignMultiple($configuration);
     }
 
@@ -88,32 +90,27 @@ class AzController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController
      * Groups the titles to their indexes
      *
      * @param $titles
+     * @param array $excludeTheseCategories
      * @return array
      */
-    protected function getAzGrouping($titles)
+    protected function getAzGrouping($titles, $excludeTheseCategories)
     {
-
         $groupings = [];
-
         $lastChar = '';
         foreach ($titles as $title) {
-
-            // find titleField and get contents
-            $objectTitle = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($title,
-                $this->configuration['titleField']);
-
-            $title->linkObject = [$this->configuration['linkObject'] => $title->getUid()];
-
-            $firstLetter = $this->getSpecifiedLetter($objectTitle, 0);
-
-            if ($firstLetter != $lastChar) {
-                $groupings[$firstLetter] = [];
+            if (!in_array($title->getUid(), $excludeTheseCategories)) {
+                // find titleField and get contents
+                $objectTitle = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($title,
+                        $this->configuration['titleField']);
+                $title->linkObject = [$this->configuration['linkObject'] => $title->getUid()];
+                $firstLetter = $this->getSpecifiedLetter($objectTitle, 0);
+                if ($firstLetter != $lastChar) {
+                    $groupings[$firstLetter] = [];
+                }
+                array_push($groupings[$firstLetter], $title);
+                $lastChar = $this->getSpecifiedLetter($objectTitle, 0);
             }
-            array_push($groupings[$firstLetter], $title);
-
-            $lastChar = $this->getSpecifiedLetter($objectTitle, 0);
         }
-
         return $groupings;
     }
 
@@ -128,4 +125,5 @@ class AzController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController
     {
         return mb_substr(mb_strtoupper(iconv('utf-8', 'ascii//TRANSLIT', $title)), $index, $index + 1, 'utf-8');
     }
+
 }

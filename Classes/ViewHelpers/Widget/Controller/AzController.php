@@ -4,7 +4,7 @@ namespace Subugoe\Nkwkeywords\ViewHelpers\Widget\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 Ingo Pfennigstorf <i.pfennigstorf@gmail.com>
+ *  (c) 2012 Ingo Pfennigstorf <pfennigstorf@sub-goettingen.de>
  *
  *  All rights reserved
  *
@@ -72,48 +72,45 @@ class AzController extends \TYPO3\CMS\Fluid\Core\Widget\AbstractWidgetController
      */
     public function indexAction()
     {
-
+        $excludeTheseCategories = [];
+        if (isset($this->settings['excludeTheseCategories']) && !empty($this->settings['excludeTheseCategories'])) {
+            $excludeTheseCategories = explode(',' , $this->settings['excludeTheseCategories']);
+        }
         // merge configuration with custom adoptions
         $customConfiguration = [
-            'titles' => $this->getAzGrouping($this->objects),
+            'titles' => $this->getAzGrouping($this->objects, $excludeTheseCategories),
             'linkPartialName' => $this->configuration['linkController'] . 'List',
             'cId' => $this->cObj->data['uid']
         ];
         $configuration = array_merge($customConfiguration, $this->configuration);
-
         $this->view->assignMultiple($configuration);
     }
 
     /**
      * Groups the titles to their indexes
      *
-     * @param $titles
-     * @return array
+     * @param array $titles Array of keywords objects
+     * @param array $excludeTheseCategories Array of Uids of the categories to be excluded
+     * @return array $groupings Array of list of ordered keywords
      */
-    protected function getAzGrouping($titles)
+    protected function getAzGrouping($titles, array $excludeTheseCategories = array())
     {
-
         $groupings = [];
-
         $lastChar = '';
         foreach ($titles as $title) {
-
-            // find titleField and get contents
-            $objectTitle = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($title,
-                $this->configuration['titleField']);
-
-            $title->linkObject = [$this->configuration['linkObject'] => $title->getUid()];
-
-            $firstLetter = $this->getSpecifiedLetter($objectTitle, 0);
-
-            if ($firstLetter != $lastChar) {
-                $groupings[$firstLetter] = [];
+            if (!in_array($title->getUid(), $excludeTheseCategories)) {
+                // find titleField and get contents
+                $objectTitle = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getProperty($title,
+                        $this->configuration['titleField']);
+                $title->linkObject = [$this->configuration['linkObject'] => $title->getUid()];
+                $firstLetter = $this->getSpecifiedLetter($objectTitle, 0);
+                if ($firstLetter != $lastChar) {
+                    $groupings[$firstLetter] = [];
+                }
+                array_push($groupings[$firstLetter], $title);
+                $lastChar = $this->getSpecifiedLetter($objectTitle, 0);
             }
-            array_push($groupings[$firstLetter], $title);
-
-            $lastChar = $this->getSpecifiedLetter($objectTitle, 0);
         }
-
         return $groupings;
     }
 
